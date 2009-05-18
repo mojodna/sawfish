@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent">
+	<TextView android:id="@+id/txtLocationDescription" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/location_update_description" />
+	<EditText android:id="@+id/txtLocation" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_below="@id/txtLocationDescription" />
+	<Button android:id="@+id/btnUpdateLocation" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/update" android:layout_below="@id/txtLocation" />
+</RelativeLayout>

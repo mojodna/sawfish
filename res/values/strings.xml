@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="location_update_description">Set your location on Fire Eagle:</string>
+    <string name="update">Update</string>
+    
+    <string name="hello">Hello World, ExplicitUpdater</string>
+    <string name="app_name">Explicit Updater</string>
+<string name="initialize_authorization">Connect to Fire Eagle</string>
+<string name="authorization_url">https://fireeagle.yahoo.net/oauth/authorize</string>
+<string name="consumer_key">MMVl9NwaGLnX</string>
+<string name="consumer_secret">1wIqfdiHkSfJaAD3qiQpasTWX0qmGOAc</string>
+<string name="access_token_url">https://fireeagle.yahooapis.com/oauth/access_token</string>
+<string name="request_token_url">https://fireeagle.yahooapis.com/oauth/request_token</string>
+<string name="callback_url">fireeagle://authorized</string>
+<string name="scheme">fireeagle</string>
+</resources>
