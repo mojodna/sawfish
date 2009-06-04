@@ -3,11 +3,7 @@
 	package="net.mojodna.fireeagle.explicit" android:versionCode="1"
 	android:versionName="1.0.0">
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
-		<activity android:name=".ExplicitUpdater" android:label="@string/app_name" android:launchMode="singleTop">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
+		<activity android:name=".AuthorizationActivity" android:label="Authorization" android:launchMode="singleTop">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW"></action>
 				<category android:name="android.intent.category.BROWSABLE"></category>
@@ -15,7 +11,13 @@
 				<data android:scheme="fireeagle"></data>
 			</intent-filter>
 		</activity>
+		<activity android:name=".ExplicitUpdater" android:label="@string/app_name" android:launchMode="singleTop">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
 	</application>
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
-<uses-sdk android:minSdkVersion="3"></uses-sdk>
+	<uses-sdk android:minSdkVersion="3"></uses-sdk>
 </manifest> 
