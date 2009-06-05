@@ -19,25 +19,36 @@ public abstract class OAuthActivity extends Activity {
 	private OAuthProvider oauthProvider;
 
 	protected OAuthConsumer getOAuthConsumer() {
-		if (null == this.oauthConsumer) {
-			this.oauthConsumer = new DefaultOAuthConsumer(
+		if (null == oauthConsumer) {
+			oauthConsumer = new DefaultOAuthConsumer(
 					getString(R.string.consumer_key),
 					getString(R.string.consumer_secret),
 					SignatureMethod.HMAC_SHA1);
+			oauthConsumer.setTokenWithSecret(getAccessToken(),
+					getAccessTokenSecret());
 		}
 
-		return this.oauthConsumer;
+		return oauthConsumer;
 	}
 
 	protected OAuthProvider getOAuthProvider() {
-		if (null == this.oauthProvider) {
-			this.oauthProvider = new DefaultOAuthProvider(getOAuthConsumer(),
+		if (null == oauthProvider) {
+			oauthProvider = new DefaultOAuthProvider(getOAuthConsumer(),
 					getString(R.string.request_token_url),
 					getString(R.string.access_token_url),
 					getString(R.string.authorization_url));
 		}
 
-		return this.oauthProvider;
+		return oauthProvider;
+	}
+
+	protected String getAccessToken() {
+		return getPreferences(MODE_PRIVATE).getString(ACCESS_TOKEN, null);
+	}
+
+	protected String getAccessTokenSecret() {
+		return getPreferences(MODE_PRIVATE)
+				.getString(ACCESS_TOKEN_SECRET, null);
 	}
 
 	@Override

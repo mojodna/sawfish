@@ -78,7 +78,8 @@ public class AuthorizationActivity extends OAuthActivity {
 		finish();
 
 		// TODO figure out a way to avoid hardcoding the Activity to return to
-		startActivity(new Intent().setClass(this, ExplicitUpdater.class));
+		startActivity(new Intent().setClass(getApplicationContext(),
+				ExplicitUpdater.class));
 	}
 
 	/**

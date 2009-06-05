@@ -13,4 +13,5 @@
 <string name="request_token_url">https://fireeagle.yahooapis.com/oauth/request_token</string>
 <string name="callback_url">fireeagle://authorized</string>
 <string name="scheme">fireeagle</string>
+<string name="location_updated">Your location has been updated.</string>
 </resources>
