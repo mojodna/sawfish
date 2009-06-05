@@ -1,5 +1,6 @@
 package net.mojodna.fireeagle.explicit;
 
+import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import oauth.signpost.exception.OAuthCommunicationException;
@@ -117,7 +118,7 @@ public class AuthorizationActivity extends OAuthActivity {
 			// this is a callback
 			Uri data = intent.getData();
 			Log.d("authorization", "Token: "
-					+ data.getQueryParameter("oauth_token"));
+					+ data.getQueryParameter(OAuth.OAUTH_TOKEN));
 
 			SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 			String requestToken = prefs.getString(REQUEST_TOKEN, null);
@@ -135,7 +136,8 @@ public class AuthorizationActivity extends OAuthActivity {
 				OAuthProvider provider = getOAuthProvider();
 
 				try {
-					provider.retrieveAccessToken();
+					provider.retrieveAccessToken(data
+							.getQueryParameter(OAuth.OAUTH_VERIFIER));
 
 					Log.d("authorization", "Access token: "
 							+ consumer.getToken());
