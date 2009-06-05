@@ -17,71 +17,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class AuthorizationActivity extends OAuthActivity {
-	// an anonymous OnClickListener for initialization purposes
-	private OnClickListener initializeFireEagleListener = new OnClickListener() {
-		public void onClick(View v) {
-			Log.i("initializeFireEagleListener", "Authorization initiated.");
-
-			// TODO wrap this as an AsyncTask with a progress bar
-
-			if (isAuthorized()) {
-				Log.d("authorization", "Already authorized.");
-				onAuthorizationCompleted();
-				return;
-			}
-
-			OAuthConsumer consumer = getOAuthConsumer();
-			OAuthProvider provider = getOAuthProvider();
-
-			try {
-				// get a request token
-				String authUrl = provider
-						.retrieveRequestToken(getString(R.string.callback_url));
-
-				Log.d("authorization", "Request token: " + consumer.getToken());
-				Log.d("authorization", "Token secret: "
-						+ consumer.getTokenSecret());
-
-				// write these to the preferences
-				SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-				Editor editor = prefs.edit();
-				editor.putString(REQUEST_TOKEN, consumer.getToken());
-				editor.putString(REQUEST_TOKEN_SECRET, consumer
-						.getTokenSecret());
-				editor.commit();
-
-				Log.d("authorization", "Authorization URL: " + authUrl);
-
-				// open a browser window to handle authorization
-				startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri
-						.parse(authUrl)));
-
-			} catch (OAuthExpectationFailedException e) {
-				// TODO give OAuth exceptions a common parent
-				e.printStackTrace();
-			} catch (OAuthMessageSignerException e) {
-				e.printStackTrace();
-			} catch (OAuthNotAuthorizedException e) {
-				e.printStackTrace();
-			} catch (OAuthCommunicationException e) {
-				e.printStackTrace();
-			}
-		}
-	};
-
-	/**
-	 * The authorization has been completed.
-	 */
-	private void onAuthorizationCompleted() {
-		// our work here is done; pass control back to the initiating activity
-		finish();
-
-		// TODO figure out a way to avoid hardcoding the Activity to return to
-		startActivity(new Intent().setClass(getApplicationContext(),
-				ExplicitUpdater.class));
-	}
-
+public class AuthorizationActivity extends OAuthActivity implements
+		OnClickListener {
 	/**
 	 * Is this an authorized callback?
 	 * 
@@ -96,6 +33,67 @@ public class AuthorizationActivity extends OAuthActivity {
 				&& intent.getData().getHost().equals("authorized");
 	}
 
+	/**
+	 * The authorization has been completed.
+	 */
+	private void onAuthorizationCompleted() {
+		// our work here is done; pass control back to the initiating activity
+		finish();
+
+		// TODO figure out a way to avoid hardcoding the Activity to return to
+		startActivity(new Intent().setClass(getApplicationContext(),
+				ExplicitUpdater.class));
+	}
+
+	public void onClick(View v) {
+		Log.i("initializeFireEagleListener", "Authorization initiated.");
+
+		// TODO wrap this as an AsyncTask with a progress bar
+
+		if (isAuthorized()) {
+			Log.d("authorization", "Already authorized.");
+			onAuthorizationCompleted();
+			return;
+		}
+
+		OAuthConsumer consumer = getOAuthConsumer();
+		OAuthProvider provider = getOAuthProvider();
+
+		try {
+			// get a request token
+			String authUrl = provider
+					.retrieveRequestToken(getString(R.string.callback_url));
+
+			Log.d("authorization", "Request token: " + consumer.getToken());
+			Log
+					.d("authorization", "Token secret: "
+							+ consumer.getTokenSecret());
+
+			// write these to the preferences
+			SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+			Editor editor = prefs.edit();
+			editor.putString(REQUEST_TOKEN, consumer.getToken());
+			editor.putString(REQUEST_TOKEN_SECRET, consumer.getTokenSecret());
+			editor.commit();
+
+			Log.d("authorization", "Authorization URL: " + authUrl);
+
+			// open a browser window to handle authorization
+			startActivity(new Intent(Intent.ACTION_VIEW).setData(Uri
+					.parse(authUrl)));
+
+		} catch (OAuthExpectationFailedException e) {
+			// TODO give OAuth exceptions a common parent
+			e.printStackTrace();
+		} catch (OAuthMessageSignerException e) {
+			e.printStackTrace();
+		} catch (OAuthNotAuthorizedException e) {
+			e.printStackTrace();
+		} catch (OAuthCommunicationException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -108,7 +106,7 @@ public class AuthorizationActivity extends OAuthActivity {
 
 		// wire up the button to the onClick listener
 		Button button = (Button) findViewById(R.id.btnInitializeFireEagle);
-		button.setOnClickListener(initializeFireEagleListener);
+		button.setOnClickListener(this);
 	}
 
 	@Override
