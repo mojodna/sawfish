@@ -25,6 +25,8 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnKeyListener;
@@ -178,12 +180,9 @@ public class ExplicitUpdater extends OAuthActivity implements OnClickListener,
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		Log.i("updater", "clearing preferences..");
-
-		clearPreferences();
-		startAuthorization();
-
-		return false;
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.options_menu, menu);
+		return true;
 	}
 
 	@Override
@@ -198,6 +197,20 @@ public class ExplicitUpdater extends OAuthActivity implements OnClickListener,
 			return true;
 		}
 
+		return false;
+	}
+
+	/* Handles item selections */
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.miReset:
+			Log.d("updater", "clearing preferences..");
+
+			clearPreferences();
+			startAuthorization();
+
+			return true;
+		}
 		return false;
 	}
 

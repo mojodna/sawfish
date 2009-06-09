@@ -20,4 +20,5 @@
 <string name="completing_authorization">Completing authorization...</string>
 <string name="initiating_authorization">Initiating authorization...</string>
 <string name="updating">Updating your location...</string>
+<string name="reset">Reset</string>
 </resources>
