@@ -15,6 +15,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences.Editor;
@@ -35,8 +36,6 @@ import android.widget.Toast;
 public class ExplicitUpdater extends OAuthActivity implements OnClickListener,
 		OnKeyListener {
 	private class UpdateLocationTask extends AsyncTask<String, Void, Void> {
-
-		private ProgressDialog dialog;
 
 		private String convertStreamToString(InputStream is) {
 			/*
@@ -106,7 +105,7 @@ public class ExplicitUpdater extends OAuthActivity implements OnClickListener,
 			EditText loc = (EditText) findViewById(R.id.txtLocation);
 			loc.setText("");
 
-			dialog.dismiss();
+			dismissDialog(DIALOG_UPDATING);
 
 			Toast toast = Toast.makeText(ExplicitUpdater.this,
 					R.string.location_updated, Toast.LENGTH_SHORT);
@@ -116,10 +115,11 @@ public class ExplicitUpdater extends OAuthActivity implements OnClickListener,
 
 		@Override
 		protected void onPreExecute() {
-			dialog = ProgressDialog.show(ExplicitUpdater.this, "",
-					"Updating your location...", true);
+			showDialog(DIALOG_UPDATING);
 		}
 	}
+
+	private static final int DIALOG_UPDATING = 0;
 
 	/**
 	 * Clear preferences.
@@ -156,6 +156,24 @@ public class ExplicitUpdater extends OAuthActivity implements OnClickListener,
 		} else {
 			startAuthorization();
 		}
+	}
+
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		Dialog dialog;
+
+		switch (id) {
+		case DIALOG_UPDATING:
+			ProgressDialog updating = new ProgressDialog(this);
+			updating.setMessage(getString(R.string.updating));
+
+			dialog = updating;
+			break;
+		default:
+			dialog = null;
+		}
+
+		return dialog;
 	}
 
 	@Override

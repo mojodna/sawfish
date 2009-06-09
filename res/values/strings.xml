@@ -14,4 +14,10 @@
 <string name="callback_url">fireeagle://authorized</string>
 <string name="scheme">fireeagle</string>
 <string name="location_updated">Your location has been updated.</string>
+<string name="authorization_redirect">Sending you to Fire Eagle for authorization.</string>
+<string name="authorization_failed">Authorization failed.</string>
+<string name="authorization_completed">Sawfish is ready.</string>
+<string name="completing_authorization">Completing authorization...</string>
+<string name="initiating_authorization">Initiating authorization...</string>
+<string name="updating">Updating your location...</string>
 </resources>

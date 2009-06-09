@@ -7,6 +7,7 @@ import oauth.signpost.exception.OAuthCommunicationException;
 import oauth.signpost.exception.OAuthExpectationFailedException;
 import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.exception.OAuthNotAuthorizedException;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,8 +26,6 @@ public class AuthorizationActivity extends OAuthActivity implements
 		OnClickListener {
 	private class RequestTokenRetrievalTask extends
 			AsyncTask<Void, Void, String> {
-
-		private ProgressDialog dialog;
 
 		@Override
 		protected String doInBackground(Void... params) {
@@ -53,13 +52,13 @@ public class AuthorizationActivity extends OAuthActivity implements
 				return authUrl;
 			} catch (OAuthExpectationFailedException e) {
 				// TODO give OAuth exceptions a common parent
-				e.printStackTrace();
+				Log.w("authorization", e);
 			} catch (OAuthMessageSignerException e) {
-				e.printStackTrace();
+				Log.w("authorization", e);
 			} catch (OAuthNotAuthorizedException e) {
-				e.printStackTrace();
+				Log.w("authorization", e);
 			} catch (OAuthCommunicationException e) {
-				e.printStackTrace();
+				Log.w("authorization", e);
 			}
 
 			return null;
@@ -67,12 +66,11 @@ public class AuthorizationActivity extends OAuthActivity implements
 
 		@Override
 		protected void onPostExecute(String authUrl) {
-			dialog.dismiss();
+			dismissDialog(DIALOG_INITIATING_AUTHORIZATION);
 
 			if (null != authUrl) {
 				Toast toast = Toast.makeText(AuthorizationActivity.this,
-						"Sending you to Fire Eagle for authorization.",
-						Toast.LENGTH_LONG);
+						R.string.authorization_redirect, Toast.LENGTH_LONG);
 				toast.setGravity(Gravity.CENTER, 0, 0);
 				toast.show();
 
@@ -83,7 +81,7 @@ public class AuthorizationActivity extends OAuthActivity implements
 				finish();
 			} else {
 				Toast toast = Toast.makeText(AuthorizationActivity.this,
-						"Authorization failed.", Toast.LENGTH_SHORT);
+						R.string.authorization_failed, Toast.LENGTH_SHORT);
 				toast.setGravity(Gravity.CENTER, 0, 0);
 				toast.show();
 			}
@@ -91,14 +89,11 @@ public class AuthorizationActivity extends OAuthActivity implements
 
 		@Override
 		protected void onPreExecute() {
-			dialog = ProgressDialog.show(AuthorizationActivity.this, "",
-					"Initiating authorization...", true);
+			showDialog(DIALOG_INITIATING_AUTHORIZATION);
 		}
 	}
 
 	private class TokenExchangeTask extends AsyncTask<Object, Void, OAuthToken> {
-
-		private ProgressDialog dialog;
 
 		@Override
 		protected OAuthToken doInBackground(Object... params) {
@@ -143,20 +138,23 @@ public class AuthorizationActivity extends OAuthActivity implements
 
 			onAuthorizationCompleted();
 
-			dialog.dismiss();
+			dismissDialog(DIALOG_COMPLETING_AUTHORIZATION);
 
 			Toast toast = Toast.makeText(AuthorizationActivity.this,
-					"Sawfish is ready.", Toast.LENGTH_SHORT);
+					R.string.authorization_completed, Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 		}
 
 		@Override
 		protected void onPreExecute() {
-			dialog = ProgressDialog.show(AuthorizationActivity.this, "",
-					"Completing authorization...", true);
+			showDialog(DIALOG_COMPLETING_AUTHORIZATION);
 		}
 	}
+
+	private static final int DIALOG_COMPLETING_AUTHORIZATION = 1;
+
+	private static final int DIALOG_INITIATING_AUTHORIZATION = 0;
 
 	/**
 	 * Is this an authorized callback?
@@ -209,6 +207,30 @@ public class AuthorizationActivity extends OAuthActivity implements
 		// wire up the button to the onClick listener
 		Button button = (Button) findViewById(R.id.btnInitializeFireEagle);
 		button.setOnClickListener(this);
+	}
+
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		Dialog dialog;
+
+		switch (id) {
+		case DIALOG_INITIATING_AUTHORIZATION:
+			ProgressDialog initiating = new ProgressDialog(this);
+			initiating.setMessage(getString(R.string.initiating_authorization));
+
+			dialog = initiating;
+			break;
+		case DIALOG_COMPLETING_AUTHORIZATION:
+			ProgressDialog completing = new ProgressDialog(this);
+			completing.setMessage(getString(R.string.completing_authorization));
+
+			dialog = completing;
+			break;
+		default:
+			dialog = null;
+		}
+
+		return dialog;
 	}
 
 	@Override
