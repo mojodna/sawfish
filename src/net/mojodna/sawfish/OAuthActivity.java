@@ -1,4 +1,4 @@
-package net.mojodna.fireeagle.explicit;
+package net.mojodna.sawfish;
 
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;

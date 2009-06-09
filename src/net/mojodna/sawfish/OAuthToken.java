@@ -1,4 +1,4 @@
-package net.mojodna.fireeagle.explicit;
+package net.mojodna.sawfish;
 
 public class OAuthToken {
 	private String token;

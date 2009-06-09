@@ -1,4 +1,4 @@
-package net.mojodna.fireeagle.explicit;
+package net.mojodna.sawfish;
 
 import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
@@ -179,7 +179,7 @@ public class AuthorizationActivity extends OAuthActivity implements
 
 		// TODO figure out a way to avoid hardcoding the Activity to return to
 		startActivity(new Intent().setClass(getApplicationContext(),
-				ExplicitUpdater.class));
+				UpdaterActivity.class));
 	}
 
 	public void onClick(View v) {

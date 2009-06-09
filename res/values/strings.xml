@@ -2,23 +2,21 @@
 <resources>
     <string name="location_update_description">Set your location on Fire Eagle:</string>
     <string name="update">Update</string>
-    
-    <string name="hello">Hello World, ExplicitUpdater</string>
-    <string name="app_name">Explicit Updater</string>
-<string name="initialize_authorization">Connect to Fire Eagle</string>
-<string name="authorization_url">https://fireeagle.yahoo.net/oauth/authorize</string>
-<string name="consumer_key">MMVl9NwaGLnX</string>
-<string name="consumer_secret">1wIqfdiHkSfJaAD3qiQpasTWX0qmGOAc</string>
-<string name="access_token_url">https://fireeagle.yahooapis.com/oauth/access_token</string>
-<string name="request_token_url">https://fireeagle.yahooapis.com/oauth/request_token</string>
-<string name="callback_url">fireeagle://authorized</string>
-<string name="scheme">fireeagle</string>
-<string name="location_updated">Your location has been updated.</string>
-<string name="authorization_redirect">Sending you to Fire Eagle for authorization.</string>
-<string name="authorization_failed">Authorization failed.</string>
-<string name="authorization_completed">Sawfish is ready.</string>
-<string name="completing_authorization">Completing authorization...</string>
-<string name="initiating_authorization">Initiating authorization...</string>
-<string name="updating">Updating your location...</string>
-<string name="reset">Reset</string>
+    <string name="app_name">Sawfish</string>
+	<string name="initialize_authorization">Connect to Fire Eagle</string>
+	<string name="authorization_url">https://m.fireeagle.yahoo.net/oauth/authorize</string>
+	<string name="consumer_key">NiS7VL2hHo9g</string>
+	<string name="consumer_secret">yXaODAs2DdgdaWM8D1R59kMPPg5bXsiO</string>
+	<string name="access_token_url">https://fireeagle.yahooapis.com/oauth/access_token</string>
+	<string name="request_token_url">https://fireeagle.yahooapis.com/oauth/request_token</string>
+	<string name="callback_url">fireeagle://authorized</string>
+	<string name="scheme">fireeagle</string>
+	<string name="location_updated">Your location has been updated.</string>
+	<string name="authorization_redirect">Sending you to Fire Eagle for authorization.</string>
+	<string name="authorization_failed">Authorization failed.</string>
+	<string name="authorization_completed">Sawfish is ready.</string>
+	<string name="completing_authorization">Completing authorization...</string>
+	<string name="initiating_authorization">Initiating authorization...</string>
+	<string name="updating">Updating your location...</string>
+	<string name="reset">Reset</string>
 </resources>

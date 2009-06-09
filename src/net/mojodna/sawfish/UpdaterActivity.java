@@ -1,4 +1,4 @@
-package net.mojodna.fireeagle.explicit;
+package net.mojodna.sawfish;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,7 +35,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ExplicitUpdater extends OAuthActivity implements OnClickListener,
+public class UpdaterActivity extends OAuthActivity implements OnClickListener,
 		OnKeyListener {
 	private class UpdateLocationTask extends AsyncTask<String, Void, Void> {
 
@@ -109,7 +109,7 @@ public class ExplicitUpdater extends OAuthActivity implements OnClickListener,
 
 			dismissDialog(DIALOG_UPDATING);
 
-			Toast toast = Toast.makeText(ExplicitUpdater.this,
+			Toast toast = Toast.makeText(UpdaterActivity.this,
 					R.string.location_updated, Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
