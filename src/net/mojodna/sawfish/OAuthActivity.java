@@ -2,8 +2,8 @@ package net.mojodna.sawfish;
 
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
-import oauth.signpost.impl.DefaultOAuthConsumer;
-import oauth.signpost.impl.DefaultOAuthProvider;
+import oauth.signpost.basic.DefaultOAuthConsumer;
+import oauth.signpost.basic.DefaultOAuthProvider;
 import oauth.signpost.signature.SignatureMethod;
 import android.app.Activity;
 import android.content.SharedPreferences;

@@ -4,6 +4,7 @@ import oauth.signpost.OAuth;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
 import oauth.signpost.exception.OAuthCommunicationException;
+import oauth.signpost.exception.OAuthException;
 import oauth.signpost.exception.OAuthExpectationFailedException;
 import oauth.signpost.exception.OAuthMessageSignerException;
 import oauth.signpost.exception.OAuthNotAuthorizedException;
@@ -50,12 +51,7 @@ public class AuthorizationActivity extends OAuthActivity implements
 				Log.d("authorization", "Authorization URL: " + authUrl);
 
 				return authUrl;
-			} catch (OAuthExpectationFailedException e) {
-				// TODO give OAuth exceptions a common parent
-				Log.w("authorization", e);
-			} catch (OAuthMessageSignerException e) {
-				Log.w("authorization", e);
-			} catch (OAuthNotAuthorizedException e) {
+			} catch (OAuthException e) {
 				Log.w("authorization", e);
 			} catch (OAuthCommunicationException e) {
 				Log.w("authorization", e);

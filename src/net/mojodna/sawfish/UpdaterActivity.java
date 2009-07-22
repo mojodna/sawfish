@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
 
-import oauth.signpost.exception.OAuthMessageSignerException;
+import oauth.signpost.exception.OAuthException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -91,7 +91,7 @@ public class UpdaterActivity extends OAuthActivity implements OnClickListener,
 						+ response.getStatusLine().getReasonPhrase());
 				Log.i("updater", convertStreamToString(response.getEntity()
 						.getContent()));
-			} catch (OAuthMessageSignerException e) {
+			} catch (OAuthException e) {
 				Log.w("updater", e);
 			} catch (ClientProtocolException e) {
 				Log.w("updater", e);
